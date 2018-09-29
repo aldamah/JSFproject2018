@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+          
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" ></meta>
+        <h:outputStylesheet library="default" name="css/bootstrap.min.css"></h:outputStylesheet>
+        <h:outputStylesheet library="default" name="css/datepicker3.css"></h:outputStylesheet>
+        <h:outputStylesheet library="default" name="css/styles.css"></h:outputStylesheet>
+        <h:outputStylesheet library="default" name="css/bootstrap-table.css"></h:outputStylesheet>
+       
+        <title>Facelets Template</title>
+    </h:head>
+
+
+<script src="js/lumino.glyphs.js"></script>
+<h:body>
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>Gestion Site  </span> touristique</a>
+				<ul class="user-menu">
+					<li class="dropdown pull-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> User <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#"> Profile</a></li>
+							<li><a href="#"> Settings</a></li>
+							<li><a href="#">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+							
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<form role="search">
+			<div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search"></input>
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li class="active"><a href="index.xhtml">Accueil</a></li>
+			<li><a href="listSite.xhtml"> Sites</a></li>
+			<li><a href="listVisiteur.xhtml"> Visiteurs</a></li>
+			<li><a href="listVisiter.xhtml"> Visites</a></li>
+			<li><a href="forms.html">Rapports</a></li>
+			
+		</ul>
+
+	</div><!--/.sidebar-->
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Tableau de bord</h1>
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-blue panel-widget ">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">5</div>
+							<div class="text-muted">Sites</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-orange panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">50</div>
+							<div class="text-muted">Visiteurs</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-teal panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">150</div>
+							<div class="text-muted">Visites</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-red panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">350000</div>
+							<div class="text-muted">Recette du mois</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+		
+		
+		
+                <div class="row">
+			<div class="col-sm-8">
+				<div class="panel panel-default">
+					<div class="panel-heading">Sites touristiques</div>
+					<div class="panel-body" >
+                                            
+						<table  data-toggle="table" data-url=""  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                                                   
+                                                    <thead>
+						    <tr>
+						        <th data-field="state" data-checkbox="true" >Numero</th>
+						        <th data-field="id" data-sortable="true">Numero</th>
+						        <th data-field="name"  data-sortable="true">Nom du Site</th>
+                                                        <th data-field="name"  data-sortable="true">Lieu</th>
+						        <th data-field="price" data-sortable="true">Tarif journalière</th>
+						    </tr>
+						    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                             
+                                                            <td><h:outputText value=""></h:outputText></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                      
+						</table>
+					</div>
+				</div>
+			</div>
+                        <div class="col-sm-4">
+                            <fieldset>
+                                <caption>Ajouter une Site</caption>
+                                <form role="form">
+							
+                                <div class="form-group">
+                                    <label>Nom</label>
+                                    <input class="form-control" placeholder="Nom du site"></input>
+				</div>
+                                    <div class="form-group">
+                                    <label>Lieu</label>
+                                    <input class="form-control" placeholder="Tana"></input>
+				</div>
+                                <div class="form-group">
+                                    <label>Tarif journalière</label>
+                                    <input class="form-control" placeholder="15000"></input>
+				</div>
+				
+					
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+				</div>
+                            </form>
+                            </fieldset>
+                            
+                        </div>
+		</div>
+								
+		
+	</div>	<!--/.main-->
+
+	<h:outputScript library="default" name="js/bootstrap.min.js" />
+        <h:outputScript library="default" name="js/jquery-1.11.1.min.js" />
+        <h:outputScript library="default" name="js/chart.min.js" />
+        <h:outputScript library="default" name="js/chart-data.js" />
+        <h:outputScript library="default" name="js/easypiechart.js" />
+        <h:outputScript library="default" name="js/easypiechart-data.js"/>
+        <h:outputScript library="default" name="js/bootstrap-datepicker.js" />
+        <h:outputScript library="default" name="js/bootstrap-table.js" />
+       
+	
+            
+</h:body>
+
+</html>

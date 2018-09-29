@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29 sept. 2018 16:11:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mg.aldamah.beans.Visiteur" table="visiteur" catalog="projetjsf2018" optimistic-lock="version">
+        <id name="visiteurId" type="java.lang.Integer">
+            <column name="visiteur_id" />
+            <generator class="identity" />
+        </id>
+        <property name="visiteurNom" type="string">
+            <column name="visiteur_nom" length="50" not-null="true" />
+        </property>
+        <property name="visiteurAdresse" type="string">
+            <column name="visiteur_adresse" length="50" not-null="true" />
+        </property>
+        <set name="visiters" table="visiter" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="visiter_visiteur_id" not-null="true" />
+            </key>
+            <one-to-many class="mg.aldamah.beans.Visiter" />
+        </set>
+    </class>
+</hibernate-mapping>
