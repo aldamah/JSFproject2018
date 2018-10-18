@@ -178,25 +178,21 @@
 								
 		
 	</div>	<!--/.main-->
-			
-					 
-					
-		
-                
-                 
-                
-		
-		
 	
-
-	<h:outputScript library="default" name="js/bootstrap.min.js" />
-        <h:outputScript library="default" name="js/jquery-1.11.1.min.js" />
-        <h:outputScript library="default" name="js/chart.min.js" />
-        <h:outputScript library="default" name="js/js/chart-data.js" />
-        <h:outputScript library="default" name="js/easypiechart.js" />
-        <h:outputScript library="default" name="js/easypiechart-data.js"/>
-        <h:outputScript library="default" name="js/bootstrap-datepicker.js" />
+	<h:outputScript library="default" name="js/jquery-1.11.1.min.js" />
+        <h:outputScript library="default" name="js/bootstrap.min.js" />        
         <h:outputScript library="default" name="js/bootstrap-table.js" />
+        <h:outputScript library="default" name="js/jquery.dataTables.min.js" />
+        <script>
+            $(document).ready(function () {
+                var options = {
+                    "language": {
+                        "url": "/resources/default/js/french.json"
+                    }
+                }
+                $(".table").DataTable(options)
+            });
+        </script>
 
 	
         

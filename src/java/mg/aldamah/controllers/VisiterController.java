@@ -30,7 +30,10 @@ public class VisiterController {
     private Visiter visiter = new Visiter();
     private Visiteur visiteur = new Visiteur();
     private Site s = new Site();
-
+    private List<Visiter> results;
+    private Date date1;
+    private Date date2;
+    
     public Visiteur getVisiteur() {
         return visiteur;
     }
@@ -46,7 +49,11 @@ public class VisiterController {
     public void setS(Site s) {
         this.s = s;
     }
-
+    public String findByDates(){
+        //this.results = this.visiterDAO.findByDates(this.s,this.date1,this.date2);
+        return "listVisiter";
+    } 
+            
     public void setVisiteur(){
         System.out.println(this.visiter.getVisiteur().getVisiteurNom());
         System.out.println(this.visiter.getSite().getSiteNom());
@@ -111,5 +118,30 @@ public class VisiterController {
     public void setVisiter(Visiter visite) {
         this.visiter = visite;
     }
+
+    public List<Visiter> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Visiter> results) {
+        this.results = results;
+    }
+
+    public Date getDate1() {
+        return date1;
+    }
+
+    public void setDate1(Date date1) {
+        this.date1 = date1;
+    }
+
+    public Date getDate2() {
+        return date2;
+    }
+
+    public void setDate2(Date date2) {
+        this.date2 = date2;
+    }
+    
     
 }

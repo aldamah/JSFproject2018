@@ -120,16 +120,22 @@
                     </div>
                     <hr></hr>
                     <h3>Liste de visites par sites</h3>
+                    <!--<h:selectOneMenu style="width:120px" class="form-control col-lg-4"  value="#{visiterController.s}">
+                        <f:selectItems value="#{siteController.getItems()}"/>
+                    </h:selectOneMenu>
                     <span>Entre</span><p:calendar value=""></p:calendar>
                     <span>et</span><p:calendar></p:calendar>
 
-                    <h:selectOneMenu class="form-control col-lg-4"  value="#{visiterController.s}">
+                    <p:commandButton value="Lister" action="#{visiterController.findBySite()}">
+                    </p:commandButton>-->
+
+                    <h:selectOneMenu style="width:120px" class="form-control col-lg-4" value="#{visiterController.s}">
                         <f:selectItems value="#{siteController.getItems()}"/>
                     </h:selectOneMenu>
-                    <h:link onclick="{visiterController.findBySite()}" value="Test"></h:link>
-                    <p:commandButton value="Lister" action="#{visiterController.findBySite()}">
+                    <span>Entre</span><p:calendar value="#{visiterController.date1}"></p:calendar>
+                    <span>et</span><p:calendar value="#{visiterController.date2}"></p:calendar>
+                    <p:commandButton value="Rechercher" action="#{visiterController.findByDates()}">
                     </p:commandButton>
-
                     <h:form>
                         <h:dataTable id="tablevisite" class="table table-bordered table-striped table-condensed" var="visite" value="#{visiterController.findBySite()}" border="1" cellpadding="2" cellspacing="2" >
 
@@ -167,6 +173,7 @@
                             </h:column>
 
                         </h:dataTable>
+                        
                     </h:form>  
                     <hr></hr>
 
@@ -185,9 +192,9 @@
                         </div>
                         <div class="form-group">
                             <label>Date</label>
-                          
+
                             <h:inputText a:type="date" value="#{visiterController.visiter.visiterDate}">
-                            <p:ajax event="change" listener="#{visiterController.setVisiteur()}" />
+                                <p:ajax event="change" listener="#{visiterController.setVisiteur()}" />
                             </h:inputText>
                         </div>
                         <div class="form-group">

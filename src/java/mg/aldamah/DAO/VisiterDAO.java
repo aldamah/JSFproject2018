@@ -7,7 +7,9 @@ package mg.aldamah.DAO;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import mg.aldamah.beans.Site;
 import mg.aldamah.beans.Visiter;
 import mg.aldamah.utils.HibernateUtil;
 import mg.aldamah.utils.myHibernateUtil;
@@ -169,6 +171,31 @@ public class VisiterDAO extends DAO<Visiter>{
            visites= q.list();
            session.flush();
            tx.commit();
+      }catch(HibernateException e){
+          if(tx != null) 
+              tx.rollback();
+          throw e;
+      } 
+      finally {
+            HibernateUtil.closeSession();
+        }
+      return visites;
+    }
+
+    public List<Visiter> findByDates(Site site, Date date1, Date date2) {
+        Session session = myHibernateUtil.getSessionFactory().getCurrentSession();
+       List<Visiter> visites;
+      
+      try{
+          tx = session.beginTransaction();
+          Query q=session.createQuery("from Visiter where site = :site and visiterDate between :date1 and :date2");
+          q.setParameter("site", site);
+          q.setParameter("date2", date2);
+          q.setParameter("date1", date1);
+          session.flush();
+           tx.commit();
+          
+           visites= q.list();
       }catch(HibernateException e){
           if(tx != null) 
               tx.rollback();
