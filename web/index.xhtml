@@ -62,11 +62,11 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li class="active"><a href="index.xhtml">Accueil</a></li>
-			<li><a href="listSite.xhtml"> Sites</a></li>
-			<li><a href="listVisiteur.xhtml"> Visiteurs</a></li>
-			<li><a href="listVisiter.xhtml"> Visites</a></li>
-			<li><a href="forms.html">Rapports</a></li>
+			<li class="active"><a href="faces/index.xhtml">Accueil</a></li>
+			<li><a href="faces/listSite.xhtml"> Sites</a></li>
+			<li><a href="faces/listVisiteur.xhtml"> Visiteurs</a></li>
+			<li><a href="faces/listVisiter.xhtml"> Visites</a></li>
+			<li><a href="faces/report.xhtml">Rapports</a></li>
 			
 		</ul>
 
@@ -88,7 +88,7 @@
 							
 						</div>
 						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large">5</div>
+                                                    <div class="large"><h:outputText value="${siteControlleur.nombreSite()}"></h:outputText></div>
 							<div class="text-muted">Sites</div>
 						</div>
 					</div>

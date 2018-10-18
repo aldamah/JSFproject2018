@@ -9,17 +9,22 @@ package mg.aldamah.controllers;
  *
  * @author Utilisateur
  */
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.*;
 import mg.aldamah.DAO.SiteDAO;
 import mg.aldamah.beans.Site;
+import mg.aldamah.beans.Visiteur;
 
 @ManagedBean(name="siteController")
 @SessionScoped
 public class SiteController {
     private SiteDAO siteDAO = new SiteDAO();
     private Site site = new Site();
-
+    private int nombreSite = findAll().size() + 1;
+    
     public Site getSite() {
         return site;
     }
@@ -50,5 +55,22 @@ public class SiteController {
         this.siteDAO.update(this.site);
         
     }
-    
+    public void init(){
+        this.site = new Site();
+    }
+  public Map<String,Integer> getItems(){
+        Map<String,Integer> items = new LinkedHashMap<String,Integer>();
+        List<Site> sites = siteDAO.findAll();
+        Iterator iterator = sites.iterator();
+        while(iterator.hasNext())
+        {
+            Site site= (Site) iterator.next();
+            items.put(site.getSiteNom(),site.getSiteId());
+        }
+        return items;
+    }
+  public int nombreSite(){
+      this.nombreSite = this.siteDAO.nombreSite();
+      return this.nombreSite;
+  }
 }

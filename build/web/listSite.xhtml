@@ -57,7 +57,7 @@
 			<li class="active"><a href="listSite.xhtml"> Sites</a></li>
 			<li><a href="listVisiteur.xhtml"> Visiteurs</a></li>
 			<li><a href="listVisiter.xhtml"> Visites</a></li>
-			<li><a href="forms.html">Rapports</a></li>
+			<li><a href="report.xhtml">Rapports</a></li>
 			
 		</ul>
 
@@ -126,12 +126,15 @@
 				</div>
 				
 					
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                     <h:commandButton  value="Ajouter" action="#{siteController.add()}" class="btn btn-primary"></h:commandButton>
                                     
                                     
 				</div>
-                                    <h:commandButton  value="Modifier" action="#{siteController.edit()}" class="btn btn-default"></h:commandButton>
+                                    <div class="col-sm-3">
+                                        <h:commandButton  value="Modifier" action="#{siteController.edit()}" class="btn btn-secondary"></h:commandButton>
+				</div>
+                                    <h:commandButton  value="Annuler" action="#{siteController.init()}" class="btn btn-default"></h:commandButton>
                             </h:form>
                             
                         </div>

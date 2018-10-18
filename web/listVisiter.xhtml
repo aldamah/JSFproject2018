@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" ></meta>
+        <h:outputStylesheet library="default" name="css/bootstrap.min.css"/>
+        <h:outputStylesheet library="default" name="css/datepicker3.css"/>
+        <h:outputStylesheet library="default" name="css/styles.css"/>
+        <h:outputStylesheet library="default" name="css/bootstrap-table.css"/>
+
+        <title>Site</title>
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><span>Gestion Site  </span> touristique</a>
+                    <ul class="user-menu">
+                        <li class="dropdown pull-right">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> User <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#"> Profile</a></li>
+                                <li><a href="#"> Settings</a></li>
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div id="sidebar-collapse" class="col-sm-2 col-lg-2 sidebar">
+            <form role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search"></input>
+                </div>
+            </form>
+            <ul class="nav menu">
+                <li ><a href="faces/index.xhtml">Accueil</a></li>
+                <li ><a href="faces/listSite.xhtml"> Sites</a></li>
+                <li ><a href="faces/listVisiteur.xhtml"> Visiteurs</a></li>
+                <li class="active"><a href="faces/listVisiter.xhtml"> Visites</a></li>
+                <li><a href="faces/report.xhtml">Rapports</a></li>
+
+            </ul>
+
+        </div><!--/.sidebar-->
+
+
+
+
+        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Visite</h1>
+                </div>
+            </div><!--/.row-->
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <h3>Liste de tous les visites</h3>
+                        <h:form>
+                            <h:dataTable id="tablevisite" class="table table-bordered table-striped table-condensed" var="visite" value="#{visiterController.findAll()}" border="1" cellpadding="2" cellspacing="2" >
+                                <h:column>
+                                    <f:facet name="header">Site</f:facet>
+                                    <h:outputText value="${visite.site.siteNom}"></h:outputText>                                            
+                                </h:column>                                             
+                                <h:column>
+                                    <f:facet name="header">Visiteur</f:facet>
+                                    <h:outputText value="${visite.visiteur.visiteurNom}"></h:outputText>                                            
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Date</f:facet>
+                                    <h:outputText value="${visite.visiterDate}">
+                                        <f:convertDateTime pattern="dd/MM/yyy"/>
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Tarif</f:facet>
+                                    <h:outputText value="${visite.site.siteTarifjournaliere}" id="tarif"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">NbJours</f:facet>
+                                    <h:outputText value="${visite.visiterNbjours}" id="jour"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Montant</f:facet>
+                                    <h:outputText value="${visite.montant}"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Action</f:facet>
+                                    <p:commandButton 
+                                        icon="ui-icon ui-icon-minus"
+                                        action="#{visiterController.delete(visite)}"
+                                        onclick="return confirm('Voulez-vous vraiment supprimer cette visite?')"></p:commandButton>
+                                    <p:commandButton icon="ui-icon ui-icon-edit" 
+                                                     onclick="#{visiterController.edit(visite)} PF('edit').show()">
+                                    </p:commandButton>
+                                </h:column>
+
+                            </h:dataTable>
+                        </h:form> 
+                    </div>
+                    <hr></hr>
+                    <h3>Liste de visites par sites</h3>
+                    <span>Entre</span><p:calendar value=""></p:calendar>
+                    <span>et</span><p:calendar></p:calendar>
+
+                    <h:selectOneMenu class="form-control col-lg-4"  value="#{visiterController.s}">
+                        <f:selectItems value="#{siteController.getItems()}"/>
+                    </h:selectOneMenu>
+                    <h:link onclick="{visiterController.findBySite()}" value="Test"></h:link>
+                    <p:commandButton value="Lister" action="#{visiterController.findBySite()}">
+                    </p:commandButton>
+
+                    <h:form>
+                        <h:dataTable id="tablevisite" class="table table-bordered table-striped table-condensed" var="visite" value="#{visiterController.findBySite()}" border="1" cellpadding="2" cellspacing="2" >
+
+                            <h:column>
+                                <f:facet name="header">Visiteur</f:facet>
+                                <h:outputText value="${visite.visiteur.visiteurNom}"></h:outputText>                                            
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Date</f:facet>
+                                <h:outputText value="${visite.visiterDate}">
+                                    <f:convertDateTime pattern="dd/MM/yyy"/>
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Tarif</f:facet>
+                                <h:outputText value="${visite.site.siteTarifjournaliere}" id="tarif"></h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">NbJours</f:facet>
+                                <h:outputText value="${visite.visiterNbjours}" id="jour"></h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Montant</f:facet>
+                                <h:outputText value="${visite.montant}"></h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Action</f:facet>
+                                <p:commandButton 
+                                    icon="ui-icon ui-icon-minus"
+                                    action="#{visiterController.delete(visite)}"
+                                    onclick="return confirm('Voulez-vous vraiment supprimer cette visite?')"></p:commandButton>
+                                <p:commandButton icon="ui-icon ui-icon-edit"
+                                                 onclick="#{visiterController.edit(visite)} PF('edit').show()">
+                                </p:commandButton>
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:form>  
+                    <hr></hr>
+
+
+                </div>
+
+                <div class="col-sm-4">
+                    <h:form role="form" prependId="false">
+
+                        <div class="form-group">
+                            <label>Visiteur</label>
+                            <h:selectOneMenu class="form-control"  value="#{visiterController.visiter.visiteur.visiteurId}">
+                                <p:ajax event="change" listener="#{visiterController.setVisiteur()}" />
+                                <f:selectItems value="#{visiteurController.getItems()}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                          
+                            <h:inputText a:type="date" value="#{visiterController.visiter.visiterDate}">
+                            <p:ajax event="change" listener="#{visiterController.setVisiteur()}" />
+                            </h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label>Site</label>
+                            <h:selectOneMenu class="form-control"  value="#{visiterController.visiter.site.siteId}">
+                                <p:ajax event="change" listener="#{visiterController.setVisiteur()}" />
+                                <f:selectItems value="#{siteController.getItems()}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="form-group">
+                            <label>NbJours</label>
+                            <h:inputText class="form-control"  value="#{visiterController.visiter.visiterNbjours}">
+                                <p:ajax event="change" listener="#{visiterController.setVisiteur()}" />
+                            </h:inputText>
+                        </div>
+
+                        <div class="col-md-6">
+                            <p:commandButton  value="Ajouter" class="btn btn-primary" >
+                                <p:ajax listener="#{visiterController.add()}"/>
+                            </p:commandButton>
+                        </div>
+                        <h:commandButton  value="Modifier" action="#{visiterController.edit()}" class="btn btn-default"></h:commandButton>
+
+                    </h:form>   
+                </div>
+            </div>
+            <!-- RAHA METY INTEGRER-NA AMTI TABLE TI AMBANY TI IZY DIA IZAY NO TENA TSARA -->
+            <!-- <div class="row">
+                     <div class="col-sm-8">
+                             <div class="panel panel-default">
+                                     <div class="panel-heading">Sites touristiques</div>
+                                     <div class="panel-body" >
+                                         
+                                             <table  data-toggle="table" data-url=""  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                                                
+                                                 <thead>
+                                                 <tr>
+                                                     <th data-field="state" data-checkbox="true" >Numero</th>
+                                                     <th data-field="id" data-sortable="true">Numero</th>
+                                                     <th data-field="name"  data-sortable="true">Nom du Site</th>
+                                                     <th data-field="name"  data-sortable="true">Lieu</th>
+                                                     <th data-field="price" data-sortable="true">Tarif journalière</th>
+                                                 </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                     <tr>
+                                                          
+                                                         <td><h:outputText value=""></h:outputText></td>
+                                                         <td></td>
+                                                         <td></td>
+                                                         <td></td>
+                                                     </tr>
+                                                 </tbody>
+                                                   
+                                             </table>
+                                     </div>
+                             </div>
+                     </div>
+             </div>-->	
+        </div>	<!--/.main-->
+        <h:outputScript library="default" name="js/bootstrap.min.js" />
+        <h:outputScript library="default" name="js/jquery-1.11.1.min.js" />
+        <h:outputScript library="default" name="js/chart.min.js" />
+        <h:outputScript library="default" name="js/js/chart-data.js" />
+        <h:outputScript library="default" name="js/easypiechart.js" />
+        <h:outputScript library="default" name="js/easypiechart-data.js"/>
+        <h:outputScript library="default" name="js/bootstrap-datepicker.js" />
+        <h:outputScript library="default" name="js/bootstrap-table.js" />
+
+
+
+    </h:body>
+
+
+</html>
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+
+

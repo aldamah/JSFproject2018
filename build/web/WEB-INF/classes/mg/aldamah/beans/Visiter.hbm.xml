@@ -8,10 +8,10 @@
             <column name="visiter_id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="site" class="mg.aldamah.beans.Site" fetch="select">
+        <many-to-one name="site" class="mg.aldamah.beans.Site" fetch="select" lazy="false">
             <column name="visiter_site_id" not-null="true" />
         </many-to-one>
-        <many-to-one name="visiteur" class="mg.aldamah.beans.Visiteur" fetch="select">
+        <many-to-one name="visiteur" class="mg.aldamah.beans.Visiteur" fetch="select" lazy="false">
             <column name="visiter_visiteur_id" not-null="true" />
         </many-to-one>
         <property name="visiterNbjours" type="int">

@@ -9,9 +9,14 @@ package mg.aldamah.controllers;
  *
  * @author Utilisateur
  */
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.*;
+import mg.aldamah.DAO.SiteDAO;
 import mg.aldamah.DAO.VisiteurDAO;
+import mg.aldamah.beans.Site;
 import mg.aldamah.beans.Visiteur;
 
 @ManagedBean(name="visiteurController")
@@ -19,6 +24,7 @@ import mg.aldamah.beans.Visiteur;
 public class VisiteurController {
     private VisiteurDAO visiteurDAO = new VisiteurDAO();
     private Visiteur visiteur = new Visiteur();
+    private SiteDAO siteDAO = new SiteDAO();
 
     public Visiteur getVisiteur() {
         return visiteur;
@@ -50,5 +56,21 @@ public class VisiteurController {
         this.visiteurDAO.update(this.visiteur);
        
     }
-    
+    public void init(){
+        this.visiteur = new Visiteur();
+    }
+       public Map<String,Integer> getItems(){
+        Map<String,Integer> items = new LinkedHashMap<String,Integer>();
+        List<Visiteur> visiteurs = visiteurDAO.findAll();
+        Iterator iterator = visiteurs.iterator();
+        while(iterator.hasNext())
+        {
+            Visiteur visiteur= (Visiteur) iterator.next();
+            items.put(visiteur.getVisiteurNom(),visiteur.getVisiteurId());
+        }
+        return items;
+    }
+        
+
+
 }

@@ -109,4 +109,22 @@ public class SiteDAO extends DAO<Site>{
       }
         return liste;
     }
+    
+    public int nombreSite(){
+        int nb;
+        Session session = myHibernateUtil.getSessionFactory().getCurrentSession();
+        try {
+            tx = session.beginTransaction();
+            Query q=session.createQuery("from Site");
+            List liste= q.list();
+            nb = liste.size() + 1;
+            session.flush();
+            tx.commit();
+        } catch (HibernateException e) { 
+            throw e; 
+        } finally {
+          // session.close(); 
+        }
+        return nb;
+    }
 }
